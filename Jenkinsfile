@@ -1,7 +1,7 @@
 pipeline {
-    agent { label "Jenkins-Agent" }
+    agent { label "jenkins-agent" }
     environment {
-              APP_NAME = "register-app-pipeline"
+              APP_NAME = "app-pipeline"
     }
 
     stages {
@@ -13,7 +13,7 @@ pipeline {
 
         stage("Checkout from SCM") {
                steps {
-                   git branch: 'main', credentialsId: 'github', url: 'https://github.com/Ashfaque-9x/gitops-register-app'
+                   git branch: 'main', credentialsId: 'github-token', url: 'https://github.com/hamzaBKR/gitops_app.git'
                }
         }
 
@@ -30,13 +30,13 @@ pipeline {
         stage("Push the changed deployment file to Git") {
             steps {
                 sh """
-                   git config --global user.name "Ashfaque-9x"
-                   git config --global user.email "ashfaque.s510@gmail.com"
+                   git config --global user.name "hamzabaker"
+                   git config --global user.email "hamzabaker03101998@gmail.com"
                    git add deployment.yaml
-                   git commit -m "Updated Deployment Manifest"
+                   git commit -m "Updated My Deployment Manifest"
                 """
-                withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
-                  sh "git push https://github.com/Ashfaque-9x/gitops-register-app main"
+                withCredentials([gitUsernamePassword(credentialsId: 'github-token', gitToolName: 'Default')]) {
+                  sh "git push https://github.com/hamzaBKR/gitops_app.gi"
                 }
             }
         }
