@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: register-app-service
+  name: app-pipeline
   labels:
-    app: register-app 
+    app: app-pipeline
 spec:
   selector:
-    app: register-app
+    app: app-pipeline
 
   ports:
     - port: 8080
